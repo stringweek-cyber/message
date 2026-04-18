@@ -408,13 +408,20 @@
 
             dayMemos.forEach((memo, index) => {
                 const item = document.createElement('div');
-                item.className = "memo-item flex items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100 gap-3";
+                const isLiked = memo.liked || false;
+                item.className = `memo-item flex items-center p-4 rounded-2xl shadow-sm border gap-3 transition-colors duration-200 ${isLiked ? 'bg-red-50 border-red-100' : 'bg-white border-slate-100'}`;
                 item.innerHTML = `
                     <input type="checkbox" ${memo.done ? 'checked' : ''} 
                         class="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500 shrink-0 cursor-pointer"
                         onchange="toggleMemo(${index})">
                     <span onclick="openEditModal('${dateKey}', ${index})" 
                         class="flex-1 text-sm cursor-pointer ${memo.done ? 'completed text-slate-400' : 'text-slate-700'} hover:text-indigo-600 transition-colors">${escapeHtml(memo.text)}</span>
+                    <button onclick="toggleLike(${index})" class="p-1 shrink-0 transition-all active:scale-125" title="중요 표시">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            fill="${isLiked ? '#f87171' : 'none'}" stroke="${isLiked ? '#f87171' : '#cbd5e1'}">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
                     <button onclick="deleteMemo(${index})" class="text-slate-300 hover:text-red-500 p-1 shrink-0 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                     </button>
@@ -499,6 +506,13 @@
             closeEditModal();
             renderMemos();
             renderCalendar();
+        }
+
+        function toggleLike(index) {
+            const dateKey = formatDate(selectedDate);
+            memos[dateKey][index].liked = !memos[dateKey][index].liked;
+            saveMemos();
+            renderMemos();
         }
 
         function toggleMemo(index) {
