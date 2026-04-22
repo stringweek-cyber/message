@@ -11,137 +11,80 @@
         body { font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .completed { text-decoration: line-through; opacity: 0.45; }
-
-        /* 날짜별 진행 링 */
         .progress-ring-container {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative; width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
         }
         .progress-ring-svg {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            transform: rotate(-90deg);
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; transform: rotate(-90deg);
         }
-        .progress-ring-bg {
-            fill: none;
-            stroke: #e2e8f0;
-            stroke-width: 2.5;
-        }
+        .progress-ring-bg { fill: none; stroke: #e2e8f0; stroke-width: 2.5; }
         .progress-ring-fill {
-            fill: none;
-            stroke: #22c55e;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            transition: stroke-dashoffset 0.4s ease;
+            fill: none; stroke: #22c55e; stroke-width: 2.5;
+            stroke-linecap: round; transition: stroke-dashoffset 0.4s ease;
         }
-        .progress-ring-fill.all-done {
-            stroke: #16a34a;
-        }
-        .day-num {
-            font-size: 13px;
-            line-height: 1;
-            position: relative;
-            z-index: 1;
-        }
-        .dot-indicator {
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #ef4444;
-            margin: 1px auto 0;
-        }
+        .progress-ring-fill.all-done { stroke: #16a34a; }
+        .day-num { font-size: 13px; line-height: 1; position: relative; z-index: 1; }
+        .dot-indicator { width: 4px; height: 4px; border-radius: 50%; background: #ef4444; margin: 1px auto 0; }
         .dot-indicator.white { background: white; }
         .dot-spacer { height: 5px; }
-
-        /* 선택된 날짜 */
         .day-selected .progress-ring-svg { display: none; }
         .day-selected .day-num-wrap {
-            width: 40px;
-            height: 40px;
-            background: #4f46e5;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1px;
+            width: 40px; height: 40px; background: #4f46e5; border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
         }
         .day-selected .day-num { color: white; font-weight: 700; font-size: 14px; }
         .day-selected .dot-indicator { background: white; }
         .day-selected .today-label { color: white; display: block; }
-
-        /* 오늘 날짜 강조 - 배경 원 */
         .day-today:not(.day-selected) .day-num-wrap {
-            width: 40px;
-            height: 40px;
-            background: #4f46e5;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1px;
+            width: 40px; height: 40px; background: #4f46e5; border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
         }
         .day-today:not(.day-selected) .day-num { color: white !important; font-weight: 700; font-size: 14px; }
         .day-today:not(.day-selected) .dot-indicator { background: white; }
-        .today-label {
-            font-size: 9px;
-            font-weight: 700;
-            color: white;
-            line-height: 1;
-            letter-spacing: -0.2px;
-        }
-
-        /* 사이드 드로어 */
+        .today-label { font-size: 9px; font-weight: 700; color: white; line-height: 1; letter-spacing: -0.2px; }
         #drawer-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.4);
-            z-index: 100; opacity: 0; pointer-events: none;
-            transition: opacity 0.25s;
+            z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.25s;
         }
         #drawer-overlay.open { opacity: 1; pointer-events: all; }
         #drawer {
             position: fixed; top: 0; left: -320px; width: 320px; height: 100vh;
             background: white; z-index: 101; box-shadow: 4px 0 24px rgba(0,0,0,0.12);
-            transition: left 0.28s cubic-bezier(.4,0,.2,1);
-            display: flex; flex-direction: column;
+            transition: left 0.28s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column;
         }
         #drawer.open { left: 0; }
         #drawer-content { flex: 1; overflow-y: auto; padding: 16px; }
-        
-        /* 수정 모달 */
         #edit-modal {
             position: fixed; inset: 0; background: rgba(0,0,0,0.45);
-            z-index: 200; display: none; align-items: center; justify-content: center;
-            padding: 16px;
+            z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px;
         }
         #edit-modal.open { display: flex; }
         #edit-modal-box {
             background: white; border-radius: 20px; padding: 24px;
-            width: 100%; max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
-
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
-
-        /* 슬라이드 애니메이션 */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .memo-item { animation: slideUp 0.2s ease forwards; }
+        .move-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px; border-radius: 6px; color: #94a3b8;
+            transition: background 0.15s, color 0.15s, transform 0.1s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .move-btn:active { transform: scale(0.88); }
+        .move-btn:hover { background: #e0e7ff; color: #4f46e5; }
+        .move-btn:disabled { opacity: 0.2; pointer-events: none; }
+        .move-btn-group { display: flex; flex-direction: column; gap: 2px; align-items: center; justify-content: center; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 h-screen flex flex-col overflow-hidden">
-
-    <!-- 드로어 오버레이 -->
     <div id="drawer-overlay" onclick="closeDrawer()"></div>
-
-    <!-- 사이드 드로어 -->
     <div id="drawer">
         <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
             <h2 class="text-lg font-bold text-indigo-600">전달사항 내보내기</h2>
@@ -150,35 +93,30 @@
             </button>
         </div>
         <div id="drawer-content">
-            <!-- 이메일 전송 -->
             <div class="mb-5">
                 <p class="text-sm font-semibold text-slate-600 mb-2">📧 이메일로 전송</p>
-                <input type="email" id="email-input" placeholder="이메일 주소 입력" 
+                <input type="email" id="email-input" placeholder="이메일 주소 입력"
                     class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-indigo-400 outline-none mb-2">
-                <button onclick="sendEmail()" 
+                <button onclick="sendEmail()"
                     class="w-full bg-indigo-600 text-white rounded-xl py-2.5 text-sm font-semibold active:scale-95 transition-transform">
                     이메일 전송
                 </button>
             </div>
             <hr class="border-slate-100 mb-5">
-            <!-- 전체 복사 -->
             <div class="mb-5">
                 <p class="text-sm font-semibold text-slate-600 mb-2">📋 전체 내용 복사</p>
-                <button onclick="copyAll()" 
+                <button onclick="copyAll()"
                     class="w-full bg-slate-100 text-slate-700 rounded-xl py-2.5 text-sm font-semibold hover:bg-slate-200 active:scale-95 transition-all">
                     클립보드에 복사
                 </button>
             </div>
             <hr class="border-slate-100 mb-4">
-            <!-- 미리보기 -->
             <div>
                 <p class="text-sm font-semibold text-slate-600 mb-2">📄 내용 미리보기</p>
                 <div id="export-preview" class="bg-slate-50 rounded-xl p-3 text-xs text-slate-600 whitespace-pre-wrap leading-relaxed max-h-80 overflow-y-auto border border-slate-100"></div>
             </div>
         </div>
     </div>
-
-    <!-- 수정 모달 -->
     <div id="edit-modal">
         <div id="edit-modal-box">
             <h3 class="text-base font-bold text-slate-800 mb-4">전달사항 수정</h3>
@@ -196,9 +134,7 @@
                         </button>
                     </div>
                 </div>
-                <!-- 숨겨진 실제 date input -->
                 <input type="date" id="edit-date-input" class="sr-only" onchange="updateDateDisplay()">
-                <!-- 보여주는 날짜 표시 -->
                 <div id="edit-date-display" onclick="document.getElementById('edit-date-input').showPicker()"
                     class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 bg-white cursor-pointer flex items-center justify-between hover:border-indigo-400 transition-colors">
                     <span id="edit-date-text">날짜 선택</span>
@@ -206,15 +142,11 @@
                 </div>
             </div>
             <div class="flex gap-2">
-                <button onclick="closeEditModal()" 
-                    class="flex-1 bg-slate-100 text-slate-600 rounded-xl py-2.5 text-sm font-semibold">취소</button>
-                <button onclick="saveEdit()" 
-                    class="flex-1 bg-indigo-600 text-white rounded-xl py-2.5 text-sm font-semibold">저장</button>
+                <button onclick="closeEditModal()" class="flex-1 bg-slate-100 text-slate-600 rounded-xl py-2.5 text-sm font-semibold">취소</button>
+                <button onclick="saveEdit()" class="flex-1 bg-indigo-600 text-white rounded-xl py-2.5 text-sm font-semibold">저장</button>
             </div>
         </div>
     </div>
-
-    <!-- Header -->
     <header class="bg-white border-b border-slate-200 px-4 py-3.5 flex items-center shrink-0">
         <button onclick="openDrawer()" class="mr-3 p-1.5 text-slate-500 hover:text-indigo-600 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -224,15 +156,11 @@
         <h1 class="text-xl font-bold text-indigo-600 flex-1">담임전달사항</h1>
         <div id="current-month-display" class="font-semibold text-slate-700 text-base">2026.04</div>
     </header>
-
-    <!-- Calendar Section -->
     <section class="bg-white px-3 pb-3 pt-2 shadow-sm shrink-0">
-        <!-- 요일 헤더 + 네비게이션 -->
         <div class="flex items-center mb-1">
             <button onclick="changeMonth(-1)" class="p-2 text-slate-400 hover:text-indigo-600 shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
-            <!-- 요일 헤더: 버튼 너비 제외하고 7등분 -->
             <div class="calendar-grid flex-1 text-center">
                 <div class="text-xs font-bold text-red-500 py-1">일</div>
                 <div class="text-xs font-bold text-slate-500 py-1">월</div>
@@ -246,385 +174,232 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </button>
         </div>
-        <!-- 날짜 그리드: 요일 헤더와 동일하게 좌우 패딩 맞춤 -->
         <div class="flex items-start">
-            <div style="width:38px; shrink:0;"></div>
-            <div id="calendar-days" class="calendar-grid flex-1 gap-y-1">
-                <!-- JS inject -->
-            </div>
-            <div style="width:38px; shrink:0;"></div>
+            <div style="width:38px;"></div>
+            <div id="calendar-days" class="calendar-grid flex-1 gap-y-1"></div>
+            <div style="width:38px;"></div>
         </div>
     </section>
-
-    <!-- Memo Section -->
     <main class="flex-1 flex flex-col overflow-hidden px-4 py-4 bg-slate-50">
         <div class="flex items-center justify-between mb-3 px-1">
             <h2 id="selected-date-title" class="text-base font-bold text-slate-800">날짜 선택</h2>
-            <span class="text-xs text-slate-400">항목 탭 → 수정/이동</span>
+            <span class="text-xs text-slate-400">↕ 순서이동 &nbsp;|&nbsp; 텍스트 탭 → 수정</span>
         </div>
-        <div id="memo-container" class="flex-1 overflow-y-auto no-scrollbar space-y-2.5 pb-24">
-        </div>
+        <div id="memo-container" class="flex-1 overflow-y-auto no-scrollbar space-y-2.5 pb-24"></div>
     </main>
-
-    <!-- Input Fixed Bottom -->
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 pb-6 flex gap-2 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]" style="z-index:50;">
-        <input type="text" id="memo-input" placeholder="오늘의 전달사항을 입력하세요..." 
+        <input type="text" id="memo-input" placeholder="오늘의 전달사항을 입력하세요..."
             class="flex-1 bg-slate-100 border-none rounded-2xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none text-sm transition-all">
         <button onclick="addMemo()" class="bg-indigo-600 text-white w-12 h-12 rounded-2xl flex items-center justify-center active:scale-95 transition-transform shadow-lg shadow-indigo-200 shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         </button>
     </div>
-
     <script>
         let currentDate = new Date();
         let selectedDate = new Date();
         let memos = JSON.parse(localStorage.getItem('teacher_daily_memos') || '{}');
         const DAY_NAMES = ['일','월','화','수','목','금','토'];
-
-        // 수정 모달 상태
         let editingDateKey = null;
         let editingIndex = null;
 
         function formatDate(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
+            return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
         }
-
         function formatDateKorean(dateStr) {
-            const [y, m, d] = dateStr.split('-').map(Number);
-            const dow = new Date(y, m - 1, d).getDay();
-            return `${y}년 ${m}월 ${d}일(${DAY_NAMES[dow]})`;
+            const [y,m,d] = dateStr.split('-').map(Number);
+            return `${y}년 ${m}월 ${d}일(${DAY_NAMES[new Date(y,m-1,d).getDay()]})`;
         }
-
-        // 진행률 링 SVG 생성
         function createProgressRing(total, done, isSelected, isToday, dayNum, dayOfWeek) {
-            const size = 40;
-            const radius = 17;
-            const circumference = 2 * Math.PI * radius;
-            const progress = total > 0 ? done / total : 0;
-            const offset = circumference - progress * circumference;
-            const allDone = total > 0 && done === total;
-
-            let numColor = 'text-slate-600';
-            if (dayOfWeek === 0) numColor = 'text-red-500';
-            else if (dayOfWeek === 6) numColor = 'text-blue-500';
-
-            const selectedClass = isSelected ? 'day-selected' : '';
-            const todayClass = isToday && !isSelected ? 'day-today' : '';
-            const hasMemo = total > 0;
-
-            return `
-                <div class="progress-ring-container ${selectedClass} ${todayClass}" onclick="selectDay(${dayNum})">
-                    ${hasMemo && !isSelected && !isToday ? `
-                    <svg class="progress-ring-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-                        <circle class="progress-ring-bg" cx="${size/2}" cy="${size/2}" r="${radius}"/>
-                        <circle class="progress-ring-fill ${allDone ? 'all-done' : ''}" cx="${size/2}" cy="${size/2}" r="${radius}"
-                            stroke-dasharray="${circumference}"
-                            stroke-dashoffset="${offset}"/>
-                    </svg>` : ''}
-                    ${(isSelected || isToday) ? `
-                    <div class="day-num-wrap">
-                        ${isToday ? '<span class="today-label">오늘</span>' : ''}
-                        <span class="day-num">${dayNum}</span>
-                        ${hasMemo ? '<div class="dot-indicator white"></div>' : '<div class="dot-spacer"></div>'}
-                    </div>
-                    ` : `
-                    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">
-                        <span class="day-num ${numColor}">${dayNum}</span>
-                        ${hasMemo ? '<div class="dot-indicator"></div>' : '<div class="dot-spacer"></div>'}
-                    </div>
-                    `}
-                </div>
-            `;
+            const r=17, c=2*Math.PI*r, offset=c-(total>0?done/total:0)*c, allDone=total>0&&done===total;
+            let numColor='text-slate-600';
+            if(dayOfWeek===0) numColor='text-red-500';
+            else if(dayOfWeek===6) numColor='text-blue-500';
+            const sc=isSelected?'day-selected':'', tc=isToday&&!isSelected?'day-today':'', hm=total>0;
+            return `<div class="progress-ring-container ${sc} ${tc}" onclick="selectDay(${dayNum})">
+                ${hm&&!isSelected&&!isToday?`<svg class="progress-ring-svg" width="40" height="40" viewBox="0 0 40 40">
+                    <circle class="progress-ring-bg" cx="20" cy="20" r="${r}"/>
+                    <circle class="progress-ring-fill ${allDone?'all-done':''}" cx="20" cy="20" r="${r}" stroke-dasharray="${c}" stroke-dashoffset="${offset}"/>
+                </svg>`:''}
+                ${(isSelected||isToday)?`<div class="day-num-wrap">
+                    ${isToday?'<span class="today-label">오늘</span>':''}
+                    <span class="day-num">${dayNum}</span>
+                    ${hm?'<div class="dot-indicator white"></div>':'<div class="dot-spacer"></div>'}
+                </div>`:`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">
+                    <span class="day-num ${numColor}">${dayNum}</span>
+                    ${hm?'<div class="dot-indicator"></div>':'<div class="dot-spacer"></div>'}
+                </div>`}
+            </div>`;
         }
-
         function renderCalendar() {
-            const daysContainer = document.getElementById('calendar-days');
-            const monthDisplay = document.getElementById('current-month-display');
-            daysContainer.innerHTML = '';
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            monthDisplay.innerText = `${year}.${String(month + 1).padStart(2, '0')}`;
-
-            const firstDay = new Date(year, month, 1).getDay();
-            const lastDate = new Date(year, month + 1, 0).getDate();
-
-            for (let i = 0; i < firstDay; i++) {
-                const empty = document.createElement('div');
-                empty.style.height = '44px';
-                daysContainer.appendChild(empty);
-            }
-
-            const todayKey = formatDate(new Date());
-
-            for (let i = 1; i <= lastDate; i++) {
-                const dateObj = new Date(year, month, i);
-                const dayOfWeek = dateObj.getDay();
-                const dateKey = formatDate(dateObj);
-                const isSelected = formatDate(selectedDate) === dateKey;
-                const isToday = todayKey === dateKey;
-                const dayMemos = memos[dateKey] || [];
-                const total = dayMemos.length;
-                const done = dayMemos.filter(m => m.done).length;
-
-                const cell = document.createElement('div');
-                cell.style.height = '44px';
-                cell.style.display = 'flex';
-                cell.style.alignItems = 'center';
-                cell.style.justifyContent = 'center';
-                cell.innerHTML = createProgressRing(total, done, isSelected, isToday, i, dayOfWeek);
-                daysContainer.appendChild(cell);
+            const dc=document.getElementById('calendar-days'), md=document.getElementById('current-month-display');
+            dc.innerHTML='';
+            const y=currentDate.getFullYear(), m=currentDate.getMonth();
+            md.innerText=`${y}.${String(m+1).padStart(2,'0')}`;
+            const firstDay=new Date(y,m,1).getDay(), lastDate=new Date(y,m+1,0).getDate();
+            for(let i=0;i<firstDay;i++){const e=document.createElement('div');e.style.height='44px';dc.appendChild(e);}
+            const todayKey=formatDate(new Date());
+            for(let i=1;i<=lastDate;i++){
+                const dateObj=new Date(y,m,i), dow=dateObj.getDay(), dk=formatDate(dateObj);
+                const isSel=formatDate(selectedDate)===dk, isTod=todayKey===dk;
+                const dm=memos[dk]||[], tot=dm.length, dn=dm.filter(x=>x.done).length;
+                const cell=document.createElement('div');
+                cell.style.cssText='height:44px;display:flex;align-items:center;justify-content:center;';
+                cell.innerHTML=createProgressRing(tot,dn,isSel,isTod,i,dow);
+                dc.appendChild(cell);
             }
         }
-
         function selectDay(day) {
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            selectedDate = new Date(year, month, day);
-            renderCalendar();
-            renderMemos();
+            selectedDate=new Date(currentDate.getFullYear(),currentDate.getMonth(),day);
+            renderCalendar(); renderMemos();
         }
-
         function renderMemos() {
-            const container = document.getElementById('memo-container');
-            const title = document.getElementById('selected-date-title');
-            const dateKey = formatDate(selectedDate);
-            title.innerText = `${selectedDate.getFullYear()}년 ${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일`;
-            container.innerHTML = '';
-
-            const dayMemos = memos[dateKey] || [];
-
-            if (dayMemos.length === 0) {
-                container.innerHTML = `
-                    <div class="flex flex-col items-center justify-center py-10 text-slate-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-                        <p class="text-sm">기록된 사항이 없습니다.</p>
-                    </div>
-                `;
+            const container=document.getElementById('memo-container');
+            const title=document.getElementById('selected-date-title');
+            const dk=formatDate(selectedDate);
+            title.innerText=`${selectedDate.getFullYear()}년 ${selectedDate.getMonth()+1}월 ${selectedDate.getDate()}일`;
+            container.innerHTML='';
+            const dm=memos[dk]||[];
+            if(dm.length===0){
+                container.innerHTML=`<div class="flex flex-col items-center justify-center py-10 text-slate-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <p class="text-sm">기록된 사항이 없습니다.</p></div>`;
                 return;
             }
-
-            dayMemos.forEach((memo, index) => {
-                const item = document.createElement('div');
-                const isLiked = memo.liked || false;
-                item.className = `memo-item flex items-center p-4 rounded-2xl shadow-sm border gap-3 transition-colors duration-200 ${isLiked ? 'bg-red-50 border-red-100' : 'bg-white border-slate-100'}`;
-                item.innerHTML = `
-                    <input type="checkbox" ${memo.done ? 'checked' : ''} 
-                        class="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500 shrink-0 cursor-pointer"
-                        onchange="toggleMemo(${index})">
-                    <span onclick="openEditModal('${dateKey}', ${index})" 
-                        class="flex-1 text-sm cursor-pointer ${memo.done ? 'completed text-slate-400' : 'text-slate-700'} hover:text-indigo-600 transition-colors">${escapeHtml(memo.text)}</span>
-                    <button onclick="toggleLike(${index})" class="p-1 shrink-0 transition-all active:scale-125" title="중요 표시">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            fill="${isLiked ? '#f87171' : 'none'}" stroke="${isLiked ? '#f87171' : '#cbd5e1'}">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                        </svg>
+            dm.forEach((memo,index)=>{
+                const item=document.createElement('div');
+                const liked=memo.liked||false, isFirst=index===0, isLast=index===dm.length-1;
+                item.className=`memo-item flex items-center p-3 rounded-2xl shadow-sm border gap-2 transition-colors duration-200 ${liked?'bg-red-50 border-red-100':'bg-white border-slate-100'}`;
+                item.innerHTML=`
+                    <div class="move-btn-group shrink-0">
+                        <button class="move-btn" onclick="moveMemo(${index},-1)" ${isFirst?'disabled':''} title="위로">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                        </button>
+                        <button class="move-btn" onclick="moveMemo(${index},1)" ${isLast?'disabled':''} title="아래로">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                    </div>
+                    <input type="checkbox" ${memo.done?'checked':''} class="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500 shrink-0 cursor-pointer" onchange="toggleMemo(${index})">
+                    <span onclick="openEditModal('${dk}',${index})" class="flex-1 text-sm cursor-pointer ${memo.done?'completed text-slate-400':'text-slate-700'} hover:text-indigo-600 transition-colors leading-snug">${escapeHtml(memo.text)}</span>
+                    <button onclick="toggleLike(${index})" class="p-1 shrink-0 transition-all active:scale-125">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="${liked?'#f87171':'none'}" stroke="${liked?'#f87171':'#cbd5e1'}"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     </button>
                     <button onclick="deleteMemo(${index})" class="text-slate-300 hover:text-red-500 p-1 shrink-0 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                    </button>
-                `;
+                    </button>`;
                 container.appendChild(item);
             });
         }
-
-        function escapeHtml(str) {
-            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        function moveMemo(index, dir) {
+            const dk=formatDate(selectedDate), arr=memos[dk];
+            if(!arr) return;
+            const t=index+dir;
+            if(t<0||t>=arr.length) return;
+            [arr[index],arr[t]]=[arr[t],arr[index]];
+            saveMemos(); renderMemos(); renderCalendar();
         }
-
-        function addMemo() {
-            const input = document.getElementById('memo-input');
-            const text = input.value.trim();
-            if (!text) return;
-            const dateKey = formatDate(selectedDate);
-            if (!memos[dateKey]) memos[dateKey] = [];
-            memos[dateKey].push({ text, done: false });
-            saveMemos();
-            input.value = '';
-            renderMemos();
-            renderCalendar();
+        function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+        function addMemo(){
+            const input=document.getElementById('memo-input'), text=input.value.trim();
+            if(!text) return;
+            const dk=formatDate(selectedDate);
+            if(!memos[dk]) memos[dk]=[];
+            memos[dk].push({text,done:false});
+            saveMemos(); input.value=''; renderMemos(); renderCalendar();
         }
-
-        function formatDateWithDay(dateKey) {
-            const [y, m, d] = dateKey.split('-').map(Number);
-            const dow = new Date(y, m - 1, d).getDay();
-            return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}(${DAY_NAMES[dow]})`;
+        function formatDateWithDay(dk){
+            const [y,m,d]=dk.split('-').map(Number);
+            return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}(${DAY_NAMES[new Date(y,m-1,d).getDay()]})`;
         }
-
-        function updateDateDisplay() {
-            const val = document.getElementById('edit-date-input').value;
-            document.getElementById('edit-date-text').textContent = val ? formatDateWithDay(val) : '날짜 선택';
+        function updateDateDisplay(){
+            const v=document.getElementById('edit-date-input').value;
+            document.getElementById('edit-date-text').textContent=v?formatDateWithDay(v):'날짜 선택';
         }
-
-        function shiftEditDate(delta) {
-            const input = document.getElementById('edit-date-input');
-            if (!input.value) return;
-            const [y, m, d] = input.value.split('-').map(Number);
-            const date = new Date(y, m - 1, d);
-            date.setDate(date.getDate() + delta);
-            input.value = formatDate(date);
-            updateDateDisplay();
+        function shiftEditDate(delta){
+            const input=document.getElementById('edit-date-input');
+            if(!input.value) return;
+            const [y,m,d]=input.value.split('-').map(Number), date=new Date(y,m-1,d);
+            date.setDate(date.getDate()+delta);
+            input.value=formatDate(date); updateDateDisplay();
         }
-
-        // 수정 모달 열기
-        function openEditModal(dateKey, index) {
-            editingDateKey = dateKey;
-            editingIndex = index;
-            const memo = memos[dateKey][index];
-            document.getElementById('edit-text-input').value = memo.text;
-            document.getElementById('edit-date-input').value = dateKey;
+        function openEditModal(dk,index){
+            editingDateKey=dk; editingIndex=index;
+            const memo=memos[dk][index];
+            document.getElementById('edit-text-input').value=memo.text;
+            document.getElementById('edit-date-input').value=dk;
             updateDateDisplay();
             document.getElementById('edit-modal').classList.add('open');
-            setTimeout(() => document.getElementById('edit-text-input').focus(), 100);
+            setTimeout(()=>document.getElementById('edit-text-input').focus(),100);
         }
-
-        function closeEditModal() {
+        function closeEditModal(){
             document.getElementById('edit-modal').classList.remove('open');
-            editingDateKey = null;
-            editingIndex = null;
+            editingDateKey=null; editingIndex=null;
         }
-
-        function saveEdit() {
-            const newText = document.getElementById('edit-text-input').value.trim();
-            const newDateKey = document.getElementById('edit-date-input').value;
-            if (!newText) { alert('내용을 입력하세요.'); return; }
-            if (!newDateKey) { alert('날짜를 선택하세요.'); return; }
-
-            const memo = memos[editingDateKey][editingIndex];
-            // 날짜가 바뀐 경우: 이동
-            if (newDateKey !== editingDateKey) {
-                memos[editingDateKey].splice(editingIndex, 1);
-                if (memos[editingDateKey].length === 0) delete memos[editingDateKey];
-                if (!memos[newDateKey]) memos[newDateKey] = [];
-                memos[newDateKey].push({ text: newText, done: memo.done });
-            } else {
-                memos[editingDateKey][editingIndex].text = newText;
-            }
-            saveMemos();
-            closeEditModal();
-            renderMemos();
-            renderCalendar();
+        function saveEdit(){
+            const newText=document.getElementById('edit-text-input').value.trim();
+            const newDk=document.getElementById('edit-date-input').value;
+            if(!newText){alert('내용을 입력하세요.');return;}
+            if(!newDk){alert('날짜를 선택하세요.');return;}
+            const memo=memos[editingDateKey][editingIndex];
+            if(newDk!==editingDateKey){
+                memos[editingDateKey].splice(editingIndex,1);
+                if(memos[editingDateKey].length===0) delete memos[editingDateKey];
+                if(!memos[newDk]) memos[newDk]=[];
+                memos[newDk].push({text:newText,done:memo.done});
+            } else { memos[editingDateKey][editingIndex].text=newText; }
+            saveMemos(); closeEditModal(); renderMemos(); renderCalendar();
         }
-
-        function toggleLike(index) {
-            const dateKey = formatDate(selectedDate);
-            memos[dateKey][index].liked = !memos[dateKey][index].liked;
-            saveMemos();
-            renderMemos();
+        function toggleLike(i){const dk=formatDate(selectedDate);memos[dk][i].liked=!memos[dk][i].liked;saveMemos();renderMemos();}
+        function toggleMemo(i){const dk=formatDate(selectedDate);memos[dk][i].done=!memos[dk][i].done;saveMemos();renderMemos();renderCalendar();}
+        function deleteMemo(i){
+            if(!confirm('이 항목을 삭제하시겠습니까?')) return;
+            const dk=formatDate(selectedDate);
+            memos[dk].splice(i,1);
+            if(memos[dk].length===0) delete memos[dk];
+            saveMemos(); renderMemos(); renderCalendar();
         }
-
-        function toggleMemo(index) {
-            const dateKey = formatDate(selectedDate);
-            memos[dateKey][index].done = !memos[dateKey][index].done;
-            saveMemos();
-            renderMemos();
-            renderCalendar();
-        }
-
-        function deleteMemo(index) {
-            if (!confirm('이 항목을 삭제하시겠습니까?')) return;
-            const dateKey = formatDate(selectedDate);
-            memos[dateKey].splice(index, 1);
-            if (memos[dateKey].length === 0) delete memos[dateKey];
-            saveMemos();
-            renderMemos();
-            renderCalendar();
-        }
-
-        function saveMemos() {
-            localStorage.setItem('teacher_daily_memos', JSON.stringify(memos));
-        }
-
-        function changeMonth(delta) {
-            currentDate.setMonth(currentDate.getMonth() + delta);
-            renderCalendar();
-        }
-
-        // 내보내기용 텍스트 생성
-        function buildExportText() {
-            const sortedKeys = Object.keys(memos).sort();
-            if (sortedKeys.length === 0) return '저장된 전달사항이 없습니다.';
-            return sortedKeys.map(dateKey => {
-                const items = memos[dateKey];
-                if (!items || items.length === 0) return null;
-                const lines = items.map((m, i) => `  ${i + 1}. ${m.text}`).join('\n');
-                return `■ ${formatDateKorean(dateKey)}\n${lines}`;
+        function saveMemos(){localStorage.setItem('teacher_daily_memos',JSON.stringify(memos));}
+        function changeMonth(delta){currentDate.setMonth(currentDate.getMonth()+delta);renderCalendar();}
+        function buildExportText(){
+            const keys=Object.keys(memos).sort();
+            if(!keys.length) return '저장된 전달사항이 없습니다.';
+            return keys.map(dk=>{
+                const items=memos[dk];
+                if(!items||!items.length) return null;
+                return `■ ${formatDateKorean(dk)}\n${items.map((m,i)=>`  ${i+1}. ${m.text}`).join('\n')}`;
             }).filter(Boolean).join('\n\n');
         }
-
-        // 드로어
-        function openDrawer() {
+        function openDrawer(){
             document.getElementById('drawer').classList.add('open');
             document.getElementById('drawer-overlay').classList.add('open');
-            // 미리보기 업데이트
-            document.getElementById('export-preview').textContent = buildExportText();
+            document.getElementById('export-preview').textContent=buildExportText();
         }
-
-        function closeDrawer() {
+        function closeDrawer(){
             document.getElementById('drawer').classList.remove('open');
             document.getElementById('drawer-overlay').classList.remove('open');
         }
-
-        // 전체 복사
-        function copyAll() {
-            const text = buildExportText();
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('클립보드에 복사되었습니다!');
-                closeDrawer();
-            }).catch(() => {
-                // fallback
-                const el = document.createElement('textarea');
-                el.value = text;
-                document.body.appendChild(el);
-                el.select();
-                document.execCommand('copy');
-                document.body.removeChild(el);
-                showToast('클립보드에 복사되었습니다!');
-                closeDrawer();
-            });
+        function copyAll(){
+            const text=buildExportText();
+            navigator.clipboard.writeText(text).then(()=>{showToast('클립보드에 복사되었습니다!');closeDrawer();})
+            .catch(()=>{const el=document.createElement('textarea');el.value=text;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);showToast('클립보드에 복사되었습니다!');closeDrawer();});
         }
-
-        // 이메일 전송 (mailto 방식)
-        function sendEmail() {
-            const email = document.getElementById('email-input').value.trim();
-            if (!email || !email.includes('@')) {
-                alert('유효한 이메일 주소를 입력하세요.');
-                return;
-            }
-            const text = buildExportText();
-            const subject = encodeURIComponent('담임 전달사항');
-            const body = encodeURIComponent(text);
-            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        function sendEmail(){
+            const email=document.getElementById('email-input').value.trim();
+            if(!email||!email.includes('@')){alert('유효한 이메일 주소를 입력하세요.');return;}
+            window.location.href=`mailto:${email}?subject=${encodeURIComponent('담임 전달사항')}&body=${encodeURIComponent(buildExportText())}`;
             closeDrawer();
         }
-
-        // 토스트 알림
-        function showToast(msg) {
-            const existing = document.getElementById('toast-msg');
-            if (existing) existing.remove();
-            const toast = document.createElement('div');
-            toast.id = 'toast-msg';
-            toast.className = 'fixed bottom-28 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-sm px-5 py-2.5 rounded-full shadow-xl z-50 font-medium';
-            toast.style.transition = 'opacity 0.3s';
-            toast.textContent = msg;
-            document.body.appendChild(toast);
-            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
+        function showToast(msg){
+            const ex=document.getElementById('toast-msg');if(ex)ex.remove();
+            const t=document.createElement('div');
+            t.id='toast-msg';
+            t.className='fixed bottom-28 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-sm px-5 py-2.5 rounded-full shadow-xl z-50 font-medium';
+            t.style.transition='opacity 0.3s'; t.textContent=msg;
+            document.body.appendChild(t);
+            setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},2000);
         }
-
-        // 초기 렌더
-        renderCalendar();
-        renderMemos();
-
-        document.getElementById('memo-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addMemo();
-        });
-
-        // 수정 모달 배경 클릭 시 닫기
-        document.getElementById('edit-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeEditModal();
-        });
+        renderCalendar(); renderMemos();
+        document.getElementById('memo-input').addEventListener('keypress',e=>{if(e.key==='Enter')addMemo();});
+        document.getElementById('edit-modal').addEventListener('click',function(e){if(e.target===this)closeEditModal();});
     </script>
 </body>
 </html>
